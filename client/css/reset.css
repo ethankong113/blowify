@@ -1,0 +1,10 @@
+@font-face {
+  font-family: freeHongKong;
+  src: url(Free-HK-Kai_4700-v1.02.ttf);
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: freeHongKong;
+}
