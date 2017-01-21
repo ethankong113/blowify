@@ -1,14 +1,18 @@
-import { renderComponent , expect } from '../../test_helper';
-import Header from '../../../../frontend/components/header/header';
+import { renderComponent, renderMUIComponent, expect } from '../../test_helper';
+import Header from '../../../frontend/components/header/header';
 
 describe('Header' , () => {
   let component;
 
   beforeEach(() => {
-    component = renderComponent(Header);
+    component = renderMUIComponent(Header);
   });
 
-  it('renders something', () => {
+  it('renders the component', () => {
     expect(component).to.exist;
+  });
+
+  it('contains the name Blowify', () => {
+    expect(component).to.contain('Blowify');
   });
 });

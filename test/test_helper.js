@@ -7,7 +7,8 @@ import chai, { expect } from 'chai';
 import chaiJquery from 'chai-jquery';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
-import reducers from '../src/reducers';
+import Material from 'material-ui/styles/MuiThemeProvider';
+import RootReducer from '../frontend/reducers/root_reducer';
 
 global.document = jsdom.jsdom('<!doctype html><html><body></body></html>');
 global.window = global.document.defaultView;
@@ -18,8 +19,20 @@ chaiJquery(chai, chai.util, $);
 
 function renderComponent(ComponentClass, props = {}, state = {}) {
   const componentInstance =  TestUtils.renderIntoDocument(
-    <Provider store={createStore(reducers, state)}>
+    <Provider store={createStore(RootReducer, state)}>
       <ComponentClass {...props} />
+    </Provider>
+  );
+
+  return $(ReactDOM.findDOMNode(componentInstance));
+}
+
+function renderMUIComponent(ComponentClass, props = {}, state = {}) {
+  const componentInstance =  TestUtils.renderIntoDocument(
+    <Provider store={createStore(RootReducer, state)}>
+      <Material>
+        <ComponentClass {...props} />
+      </Material>
     </Provider>
   );
 
@@ -33,4 +46,4 @@ $.fn.simulate = function(eventName, value) {
   TestUtils.Simulate[eventName](this[0]);
 };
 
-export {renderComponent, expect};
+export {renderComponent, renderMUIComponent, expect};
